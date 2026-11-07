@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catdex</title>
+  <meta name="description" content="Catch the cats in your neighbourhood: Catdex finds the cat in your photo, files it by coat, recognises cats you've met before and writes each new cat a trading card.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="top">
+    <a class="wordmark" href="#catch"><span class="ball" aria-hidden="true"></span>Catdex</a>
+    <nav class="tabs" aria-label="Pages">
+      <a href="#catch" data-tab="catch">Catch</a>
+      <a href="#dex" data-tab="dex">Catdex</a>
+      <a href="#badges" data-tab="badges">Badges</a>
+    </nav>
+  </header>
+
+  <main id="view" class="wrap" tabindex="-1"></main>
+
+  <footer class="foot wrap">
+    <p>Catdex by Neo Yu Hui, an SMU BIA AI Lodge project. Your Catdex is saved in this browser only. Card stats and personalities are just for fun.</p>
+    <p><a href="https://www.smubia.com/ailodge" target="_blank" rel="noopener">Join AI Lodge</a> · <a href="https://www.smubia.com/Projects" target="_blank" rel="noopener">Explore other projects</a> · <a href="https://github.com/smubia-projects/ail-ay2627-s1-yuhui-catdex" target="_blank" rel="noopener">View on GitHub</a></p>
+  </footer>
+
+  <!-- Rate-limit CTA (HTTP 429) and the paused notice (HTTP 503) -->
+  <div id="rl-modal" class="rl-backdrop" hidden>
+    <div class="rl-card" role="dialog" aria-modal="true" aria-labelledby="rl-title">
+      <div class="rl-banner">
+        <i class="rl-dot a"></i><i class="rl-dot b"></i>
+        <div class="rl-emoji" aria-hidden="true">🐾</div>
+        <h2 id="rl-title">You've been busy catching cats!</h2>
+        <p id="rl-desc"></p>
+      </div>
+      <div class="rl-body">
+        <a class="rl-btn primary" href="https://www.smubia.com/ailodge" target="_blank" rel="noopener">Join AI Lodge<span aria-hidden="true">→</span></a>
+        <a class="rl-btn" href="https://www.smubia.com/Projects" target="_blank" rel="noopener">Explore other projects<span aria-hidden="true">→</span></a>
+        <a class="rl-btn" href="https://github.com/smubia-projects/ail-ay2627-s1-yuhui-catdex" target="_blank" rel="noopener">View on GitHub<span aria-hidden="true">→</span></a>
+        <button type="button" class="rl-later" data-close>Maybe later</button>
+      </div>
+    </div>
+  </div>
+  <div id="paused-modal" class="rl-backdrop" hidden>
+    <div class="paused-card" role="dialog" aria-modal="true" aria-labelledby="paused-title">
+      <div class="rl-emoji" aria-hidden="true">⏸️</div>
+      <h2 id="paused-title">Demo temporarily paused</h2>
+      <p id="paused-msg">This demo is temporarily paused. Check back soon.</p>
+      <button type="button" class="btn" data-close>Got it</button>
+    </div>
+  </div>
+
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
