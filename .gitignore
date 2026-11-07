@@ -1,6 +1,7 @@
 # ---- Secrets: NEVER upload ----
 .env
 .env.*
+!.env.example
 
 # ---- Your Catdex data (cat photos, cards, fingerprints) and its backups ----
 catdex_db/
