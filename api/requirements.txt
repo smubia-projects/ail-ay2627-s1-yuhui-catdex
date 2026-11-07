@@ -1,0 +1,17 @@
+# Catdex API image (Hugging Face Space). The versions the AI Lodge demo was tested with.
+# CPU-only PyTorch: the CUDA build is several GB and the Space runs on CPU.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.15.0+cpu
+torchvision==0.29.2+cpu
+transformers==5.22.1
+huggingface-hub==2.4.0
+ultralytics==8.4.197
+opencv-python==5.0.0.93
+numpy==2.5.4
+pillow==13.0.0
+pillow-heif
+fastapi==0.162.0
+uvicorn==0.54.0
+python-multipart==0.0.33
+httpx==0.28.1
+upstash-redis==1.8.0

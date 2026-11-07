@@ -210,11 +210,9 @@ def _claude():
     return _client
 
 
-def personality_from_claude(crop, name, coat, vibe):
-    """Ask Claude for a personality. Returns a dict, or raises an error if anything goes wrong."""
-    client = _claude()
-    started = time.perf_counter()
-    prompt = (
+def card_prompt(name, coat, vibe):
+    """The instructions for the card writer (shared by Claude here and the web API's OpenAI-compatible call)."""
+    return (
         f"You write playful trading cards for Catdex, an app where people collect the cats they meet.\n"
         f"This cat is called {name}. Its Catdex coat page is '{coat}' and its vibe in this photo is '{vibe}'.\n"
         f"Look at the photo and write its card:\n"
@@ -225,6 +223,13 @@ def personality_from_claude(crop, name, coat, vibe):
         f"- favourite_thing: a short phrase\n"
         f"Keep it kind, funny and family-friendly. No claims about the cat's health or real behaviour."
     )
+
+
+def personality_from_claude(crop, name, coat, vibe):
+    """Ask Claude for a personality. Returns a dict, or raises an error if anything goes wrong."""
+    client = _claude()
+    started = time.perf_counter()
+    prompt = card_prompt(name, coat, vibe)
     response = client.messages.create(
         model=LLM_MODEL,
         max_tokens=600,

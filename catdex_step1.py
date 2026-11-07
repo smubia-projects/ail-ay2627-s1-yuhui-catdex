@@ -52,6 +52,11 @@ def find_cat(image_path):
     image = cv2.imread(image_path)                     # load the photo (OpenCV uses BGR colour order)
     if image is None:
         return {"ok": False, "message": f"Could not open {image_path}"}
+    return find_cat_in(image)
+
+
+def find_cat_in(image):
+    """The same check on a photo already loaded as an OpenCV (BGR) image, e.g. one uploaded to the web API."""
 
     # Run YOLO, looking for cats AND dogs. We use the LOWER confidence level here so faint
     # second cats are found too, then apply the stricter level to the main cat below.
