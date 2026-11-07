@@ -1,0 +1,10 @@
+# Only the API, the four pipeline steps and the coat labels go into the image.
+*
+!api/
+!catdex_step1.py
+!catdex_step2.py
+!catdex_step3.py
+!catdex_step4.py
+!coat_labels.csv
+**/__pycache__
+**/*.pyc
