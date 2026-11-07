@@ -44,8 +44,7 @@ async function call(path, init) {
 function quota(err) {
   if (!(err instanceof Stop)) return false;
   if (err.status === 429) {
-    const n = err.body?.detail?.queries_used ?? err.body?.queries_used ?? "a few";
-    document.getElementById("rl-desc").textContent = `This demo ran ${n} of these for you, its limit for now. Want to build AI apps like this one? Join us, or run your own copy from GitHub.`;
+    document.getElementById("rl-desc").textContent = "Want to build AI that recognises an animal's coat, breed and features from a single photo? AI Lodge students turn curiosity into deployed products, and the showcase is where they get seen.";
     openModal("rl-modal"); return true;
   }
   if (err.status === 503) {
