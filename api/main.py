@@ -231,12 +231,17 @@ JSON_REPLY = ("\n\nReply with only one JSON object with the keys title, traits (
               "No other text and no code fence.")
 
 
+# The card writer reads the photo through an OpenAI-compatible gateway. The AI Lodge default reads images; the student's
+# own Anthropic-SDK script (catdex_step4.py) keeps LLM_MODEL = Claude Haiku 4.5.
+DEFAULT_VISION_MODEL = "deepseek-v4-1-flash-260910"
+
+
 def _llm_config() -> tuple[str, str, str] | None:
     key = (os.getenv("API_KEY") or "").strip()
     if not key:
         return None
     base = ((os.getenv("API_BASE_URL") or "").strip() or "https://api.apiyi.com/v1").rstrip("/")
-    model = (os.getenv("VISION_MODEL_NAME") or os.getenv("MODEL_NAME") or "").strip() or step4.LLM_MODEL  # the card call sends the photo
+    model = (os.getenv("VISION_MODEL_NAME") or os.getenv("MODEL_NAME") or "").strip() or DEFAULT_VISION_MODEL  # the card call sends the photo
     return key, base, model
 
 
@@ -256,6 +261,8 @@ async def _write_personality(cfg: tuple[str, str, str], crop: np.ndarray, name: 
     payload = {"model": model, "max_tokens": 600, "messages": [{"role": "user", "content": [
         {"type": "image_url", "image_url": {"url": image_url}},
         {"type": "text", "text": step4.card_prompt(name, coat, vibe) + JSON_REPLY}]}]}
+    if "deepseek" in model.lower():
+        payload["reasoning_effort"] = "none"  # DeepSeek thinks first by default; the card call has a short timeout
     async with httpx.AsyncClient(timeout=step4.CLAUDE_TIMEOUT + 10) as client:
         r = await client.post(f"{base}/chat/completions", json=payload, headers={"Authorization": f"Bearer {key}"})
     r.raise_for_status()
